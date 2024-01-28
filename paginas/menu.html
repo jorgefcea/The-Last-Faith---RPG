@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../estilos/estilos.css">
+    <title>The Last Faith - RPG</title>
+    <link rel="icon" href="../img/icono.png" type="image/x-icon">
+</head>
+<body>
+    <img src="../img/logo.png" alt="Logo" id="logo">
+    <div id="contenedor2">
+        <h1>⚔️ Menú Principal ⚔️</h1>
+        <hr>
+        <h2>🛡️ <u>¡Bienvenido, <span id="nombreUsuario"></span>!</u> 🛡️</h2>
+        <br>
+        <div id="menu">
+            <p>◻️ 1. LUCHAR CONTRA EL ENEMIGO</p>
+            <p>◻️ 2. COMPRAR ITEMS</p>
+            <p>◻️ 3. CONSULTAR TUS ESTADÍSTICAS</p>
+            <p>◻️ 4. SALIR DEL JUEGO</p>
+        </div>
+        <br><br>
+        <a href="luchar.html"><button class="btnMenu" id="luchar">⚔️</button></a>
+        <a href="comprar.html"><button class="btnMenu" id="comprarItems">💰</button></a>
+        <a href="estadisticas.html"><button class="btnMenu" id="consultarEstadisticas">📈</button></a>
+        <a href="../index.html"><button class="btnMenu" id="salirDelJuego">❌</button></a>
+    </ul>
+        <br><br><br>
+    </div>
+    <script src="../javascript/app.js"></script>
+    <script src="../javascript/juego.js"></script>
+<script>
+    var nombreUsuario = localStorage.getItem("nombreUsuario");
+    if (nombreUsuario) {
+        document.getElementById("nombreUsuario").innerText = nombreUsuario;
+    }
+
+    document.getElementById("salirDelJuego").addEventListener("click", function() {
+    reiniciarJuego();
+    });
+
+    function reiniciarJuego() {
+        localStorage.removeItem("nombreUsuario");
+        localStorage.removeItem("puntosSalud");
+        localStorage.removeItem("puntosAtaque");
+        localStorage.removeItem("dinero");
+
+        for (const enemigo of enemigosVivos) {
+            localStorage.removeItem(`enemigo_${enemigo.getNombre()}_puntosSalud`);
+            localStorage.removeItem(`enemigo_${enemigo.getNombre()}_puntosAtaque`);
+            localStorage.removeItem(`enemigo_${enemigo.getNombre()}_dinero`);
+        }
+    }
+</script>
+</body>
+</html>
